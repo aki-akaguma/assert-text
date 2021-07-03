@@ -1,0 +1,17 @@
+[package]
+name = "test-helper"
+version = "0.1.1"
+edition = "2018"
+
+[[bin]]
+name = "test-helper"
+path = "src/main.rs"
+
+[dependencies]
+assert-text = { path="../" }
+
+[dev-dependencies]
+exec-target = "0.2"
+
+[build-dependencies]
+rustc_version = "0.4"

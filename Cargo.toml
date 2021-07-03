@@ -1,0 +1,20 @@
+[package]
+name = "assert-text"
+version = "0.2.4"
+authors = ["aki <aki.akaguma@hotmail.com>"]
+description = """
+the testing macro tools.
+"""
+keywords = ["assert", "text"]
+categories = ["development-tools::testing", "text-processing"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+edition = "2018"
+repository = "https://github.com/aki-akaguma/assert-texts"
+
+[dependencies]
+difference = "2.0"
+regex = "1.5"
+
+[workspace]
+members = ["test-helper"]
