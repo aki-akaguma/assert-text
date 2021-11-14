@@ -4,14 +4,13 @@ the testing macro tools.
 This checks that strings are equal.
 You will see different characters if that is different.
 
-* minimum support rustc 1.43.0
-
-## Features
+# Features
 
 - assert_text_eq!(txt1, txt2)
 - assert_text_starts_with!(txt1, txt2)
 - assert_text_ends_with!(txt1, txt2)
 - assert_text_match!(txt1, regex_text2)
+- minimum support rustc 1.43.1 (8d69840ab 2020-05-04)
 
 */
 
