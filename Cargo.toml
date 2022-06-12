@@ -9,7 +9,7 @@ keywords = ["assert", "text"]
 categories = ["development-tools::testing", "text-processing"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 repository = "https://github.com/aki-akaguma/assert-texts"
 
 [dependencies]
