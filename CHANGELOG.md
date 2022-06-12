@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.2.6 (2022-06-12)
+=====
+
+* changes to edition 2021
+
 0.2.5 (2021-11-14)
 =====
 
