@@ -1,5 +1,10 @@
 # assert-text
 
+[![crate][crate-image]][crate-link]
+[![Docs][docs-image]][docs-link]
+![Rust Version][rustc-image]
+![Apache2/MIT licensed][license-image]
+
 the testing macro tools.
 
 This checks that strings are equal.
@@ -28,3 +33,12 @@ This project is licensed under either of
    https://opensource.org/licenses/MIT)
 
 at your option.
+
+[//]: # (badges)
+
+[crate-image]: https://img.shields.io/crates/v/assert-text.svg
+[crate-link]: https://crates.io/crates/assert-text
+[docs-image]: https://docs.rs/assert-text/badge.svg
+[docs-link]: https://docs.rs/assert-text/
+[rustc-image]: https://img.shields.io/badge/rustc-1.56+-blue.svg
+[license-image]: https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg
