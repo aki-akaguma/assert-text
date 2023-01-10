@@ -14,7 +14,7 @@ repository = "https://github.com/aki-akaguma/assert-texts"
 
 [dependencies]
 difference = "2.0"
-regex = "1.5"
+regex = "1.7"
 
 [workspace]
 members = ["test-helper"]

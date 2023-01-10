@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 * reformat `CHANGELOG.md`
+* update crates: regex(1.7)
 
 
 ## [0.2.6] (2022-06-12)
