@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] *
+### Added
+* `.github/workflows/test-ubuntu.yml`
+* `.github/workflows/test-macos.yml`
+* `.github/workflows/test-windows.yml`
+* test status badges into `README.tpl`
+* `rust-version = "1.56.0"` into `Cargo.toml`
+
 ### Fixed
 * clippy: `single_component_path_imports`, `redundant_static_lifetimes`
 * clippy: `needless_borrow`, `bool_assert_comparison`
