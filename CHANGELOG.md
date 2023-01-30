@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `rust-version = "1.56.0"` into `Cargo.toml`
 
 ### Fixed
+* bug: test result failed on windows
 * clippy: `single_component_path_imports`, `redundant_static_lifetimes`
 * clippy: `needless_borrow`, `bool_assert_comparison`
 

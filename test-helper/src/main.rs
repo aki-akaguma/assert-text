@@ -39,5 +39,7 @@ fn read_file(file1: String) -> String {
         .unwrap()
         .read_to_string(&mut s)
         .unwrap();
+    #[cfg(windows)]
+    let s = s.replace("\r\n", "\n");
     s
 }

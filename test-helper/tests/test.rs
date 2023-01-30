@@ -26,6 +26,25 @@ mod test_1 {
     //use exec_target::args_from;
     const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
+    #[cfg(not(windows))]
+    macro_rules! thread_panic_error_out {
+        () => {
+            concat!(
+                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:8:5\n",
+                note_backtrace!()
+            )
+        };
+    }
+    #[cfg(windows)]
+    macro_rules! thread_panic_error_out {
+        () => {
+            concat!(
+                "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:8:5\n",
+                note_backtrace!()
+            )
+        };
+    }
+    //
     #[test]
     fn test_11() {
         let oup = exec_target(
@@ -42,13 +61,7 @@ mod test_1 {
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text2.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:8:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(
             oup.stdout,
             concat!(
@@ -69,13 +82,7 @@ mod test_1 {
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text3.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:8:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(
             oup.stdout,
             concat!(
@@ -95,13 +102,7 @@ mod test_1 {
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text4.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:8:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(
             oup.stdout,
             concat!(
@@ -121,13 +122,7 @@ mod test_1 {
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text5.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:8:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(
             oup.stdout,
             concat!(
@@ -151,6 +146,25 @@ mod test_2 {
     //use exec_target::args_from;
     const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
+    #[cfg(not(windows))]
+    macro_rules! thread_panic_error_out {
+        () => {
+            concat!(
+                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:12:5\n",
+                note_backtrace!()
+            )
+        };
+    }
+    #[cfg(windows)]
+    macro_rules! thread_panic_error_out {
+        () => {
+            concat!(
+                "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:12:5\n",
+                note_backtrace!()
+            )
+        };
+    }
+    //
     #[test]
     fn test_11() {
         let oup = exec_target(
@@ -167,13 +181,7 @@ mod test_2 {
             TARGET_EXE_PATH,
             ["2", fixtures!("text1.txt"), fixtures!("text2.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:12:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(
             oup.stdout,
             concat!(
@@ -203,13 +211,7 @@ mod test_2 {
             TARGET_EXE_PATH,
             ["2", fixtures!("text1.txt"), fixtures!("text4.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:12:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(
             oup.stdout,
             concat!(
@@ -227,13 +229,7 @@ mod test_2 {
             TARGET_EXE_PATH,
             ["2", fixtures!("text1.txt"), fixtures!("text5.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:12:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(
             oup.stdout,
             concat!(
@@ -257,6 +253,25 @@ mod test_3 {
     //use exec_target::args_from;
     const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
+    #[cfg(not(windows))]
+    macro_rules! thread_panic_error_out {
+        () => {
+            concat!(
+                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:16:5\n",
+                note_backtrace!()
+            )
+        };
+    }
+    #[cfg(windows)]
+    macro_rules! thread_panic_error_out {
+        () => {
+            concat!(
+                "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:16:5\n",
+                note_backtrace!()
+            )
+        };
+    }
+    //
     #[test]
     fn test_11() {
         let oup = exec_target(
@@ -273,13 +288,7 @@ mod test_3 {
             TARGET_EXE_PATH,
             ["3", fixtures!("text1.txt"), fixtures!("text2.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:16:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(oup.stdout, concat!(
             "\u{1b}[31m-\u{1b}[0m\u{1b}[31;7mHow razorback-jumping frogs can level six piqued gymnasts!\u{1b}[0m\u{1b}[31m \u{1b}[0m\n\u{1b}[32m+\u{1b}[0m\u{1b}[32;7mnasts!\u{1b}[0m\u{1b}[32m \u{1b}[0m\n",
             " Cozy lummox gives smart squid who asks for job pen.\n",
@@ -296,13 +305,7 @@ mod test_3 {
             TARGET_EXE_PATH,
             ["3", fixtures!("text1.txt"), fixtures!("text3.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:16:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(oup.stdout, concat!(
             "\u{1b}[31m-\u{1b}[0m\u{1b}[31;7mHow razorback-jumping frogs can level six piqued gymnasts!\u{1b}[0m\n",
             "\u{1b}[31m-\u{1b}[0m\u{1b}[31;7mCozy lummox gives smart squid who asks for job pen.\u{1b}[0m\n",
@@ -328,13 +331,7 @@ mod test_3 {
             TARGET_EXE_PATH,
             ["3", fixtures!("text1.txt"), fixtures!("text5.txt")],
         );
-        assert_eq!(
-            oup.stderr,
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper/src/t.rs:16:5\n",
-                note_backtrace!()
-            )
-        );
+        assert_eq!(oup.stderr, thread_panic_error_out!());
         assert_eq!(
             oup.stdout,
             concat!(
