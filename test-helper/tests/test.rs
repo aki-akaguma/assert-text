@@ -1,4 +1,4 @@
-const TARGET_EXE_PATH: &'static str = env!("CARGO_BIN_EXE_test-helper");
+const TARGET_EXE_PATH: &str = env!("CARGO_BIN_EXE_test-helper");
 
 macro_rules! fixtures {
     ($n: expr) => {
@@ -24,23 +24,23 @@ macro_rules! note_backtrace {
 mod test_1 {
     use exec_target::exec_target;
     //use exec_target::args_from;
-    const TARGET_EXE_PATH: &'static str = super::TARGET_EXE_PATH;
+    const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
     #[test]
     fn test_11() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["1", fixtures!("text1.txt"), fixtures!("text1.txt")],
+            ["1", fixtures!("text1.txt"), fixtures!("text1.txt")],
         );
         assert_eq!(oup.stderr, "");
         assert_eq!(oup.stdout, "");
-        assert_eq!(oup.status.success(), true);
+        assert!(oup.status.success());
     }
     #[test]
     fn test_12() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["1", fixtures!("text1.txt"), fixtures!("text2.txt")],
+            ["1", fixtures!("text1.txt"), fixtures!("text2.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -61,13 +61,13 @@ mod test_1 {
                 "\u{1b}[32m+The quick brown fox jumps over the \u{1b}[0m\u{1b}[32;7mlazy\u{1b}[0m\u{1b}[32m dog. \u{1b}[0m\n"
             )
         );
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
     #[test]
     fn test_13() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["1", fixtures!("text1.txt"), fixtures!("text3.txt")],
+            ["1", fixtures!("text1.txt"), fixtures!("text3.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -87,13 +87,13 @@ mod test_1 {
                 "\u{1b}[1;32m+The quick brown fox jumps over the lazy dog.\u{1b}[0m\n"
             )
         );
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
     #[test]
     fn test_14() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["1", fixtures!("text1.txt"), fixtures!("text4.txt")],
+            ["1", fixtures!("text1.txt"), fixtures!("text4.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -113,13 +113,13 @@ mod test_1 {
                 " The quick brown fox jumps over the lazy dog.\n"
             )
         );
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
     #[test]
     fn test_15() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["1", fixtures!("text1.txt"), fixtures!("text5.txt")],
+            ["1", fixtures!("text1.txt"), fixtures!("text5.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -141,7 +141,7 @@ mod test_1 {
                 " The quick brown fox jumps over the lazy dog.\n"
             )
         );
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
 }
 
@@ -149,15 +149,15 @@ mod test_1 {
 mod test_2 {
     use exec_target::exec_target;
     //use exec_target::args_from;
-    const TARGET_EXE_PATH: &'static str = super::TARGET_EXE_PATH;
+    const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
     #[test]
     fn test_11() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["2", fixtures!("text1.txt"), fixtures!("text1.txt")],
+            ["2", fixtures!("text1.txt"), fixtures!("text1.txt")],
         );
-        assert_eq!(oup.status.success(), true);
+        assert!(oup.status.success());
         assert_eq!(oup.stdout, "");
         assert_eq!(oup.stderr, "");
     }
@@ -165,7 +165,7 @@ mod test_2 {
     fn test_12() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["2", fixtures!("text1.txt"), fixtures!("text2.txt")],
+            ["2", fixtures!("text1.txt"), fixtures!("text2.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -185,23 +185,23 @@ mod test_2 {
                 "\u{1b}[31m- \u{1b}[0m\n\u{1b}[32m+My faxed joke won a pager in the cable TV quiz \u{1b}[0m\n"
             )
         );
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
     #[test]
     fn test_13() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["2", fixtures!("text1.txt"), fixtures!("text3.txt")],
+            ["2", fixtures!("text1.txt"), fixtures!("text3.txt")],
         );
         assert_eq!(oup.stderr, "");
         assert_eq!(oup.stdout, "");
-        assert_eq!(oup.status.success(), true);
+        assert!(oup.status.success());
     }
     #[test]
     fn test_14() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["2", fixtures!("text1.txt"), fixtures!("text4.txt")],
+            ["2", fixtures!("text1.txt"), fixtures!("text4.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -219,13 +219,13 @@ mod test_2 {
                 "\u{1b}[32m+\u{1b}[0m\u{1b}[32;7mCozy lummox gives smart squid who asks \u{1b}[0m\u{1b}[32m \u{1b}[0m\n"
             )
         );
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
     #[test]
     fn test_15() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["2", fixtures!("text1.txt"), fixtures!("text5.txt")],
+            ["2", fixtures!("text1.txt"), fixtures!("text5.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -247,7 +247,7 @@ mod test_2 {
                 " The quick brown fox jumps over the lazy dog.\n"
             )
         );
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
 }
 
@@ -255,23 +255,23 @@ mod test_2 {
 mod test_3 {
     use exec_target::exec_target;
     //use exec_target::args_from;
-    const TARGET_EXE_PATH: &'static str = super::TARGET_EXE_PATH;
+    const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
     #[test]
     fn test_11() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["3", fixtures!("text1.txt"), fixtures!("text1.txt")],
+            ["3", fixtures!("text1.txt"), fixtures!("text1.txt")],
         );
         assert_eq!(oup.stderr, "");
         assert_eq!(oup.stdout, "");
-        assert_eq!(oup.status.success(), true);
+        assert!(oup.status.success());
     }
     #[test]
     fn test_12() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["3", fixtures!("text1.txt"), fixtures!("text2.txt")],
+            ["3", fixtures!("text1.txt"), fixtures!("text2.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -288,13 +288,13 @@ mod test_3 {
             " My faxed joke won a pager in the cable TV quiz show.\n",
             "\u{1b}[31m-The quick brown fox jumps over the \u{1b}[0m\u{1b}[31;7ma\u{1b}[0m\u{1b}[31m dog. \u{1b}[0m\n\u{1b}[32m+The quick brown fox jumps over the \u{1b}[0m\u{1b}[32;7mlazy\u{1b}[0m\u{1b}[32m dog. \u{1b}[0m\n"
             ));
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
     #[test]
     fn test_13() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["3", fixtures!("text1.txt"), fixtures!("text3.txt")],
+            ["3", fixtures!("text1.txt"), fixtures!("text3.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -310,23 +310,23 @@ mod test_3 {
             "\u{1b}[32m+\u{1b}[0m\u{1b}[32;7mThe quick brown fox jumps over the lazy dog.\u{1b}[0m\n",
             "\u{1b}[32m+ \u{1b}[0m\n"
             ));
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
     #[test]
     fn test_14() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["3", fixtures!("text1.txt"), fixtures!("text4.txt")],
+            ["3", fixtures!("text1.txt"), fixtures!("text4.txt")],
         );
         assert_eq!(oup.stderr, "");
         assert_eq!(oup.stdout, "");
-        assert_eq!(oup.status.success(), true);
+        assert!(oup.status.success());
     }
     #[test]
     fn test_15() {
         let oup = exec_target(
             TARGET_EXE_PATH,
-            &["3", fixtures!("text1.txt"), fixtures!("text5.txt")],
+            ["3", fixtures!("text1.txt"), fixtures!("text5.txt")],
         );
         assert_eq!(
             oup.stderr,
@@ -347,6 +347,6 @@ mod test_3 {
                 " My faxed joke won a pager in the cable TV quiz show.\n The quick brown fox jumps over the lazy dog.\n"
             )
         );
-        assert_eq!(oup.status.success(), false);
+        assert!(!oup.status.success());
     }
 }

@@ -1,4 +1,4 @@
-use assert_text;
+//
 
 pub fn t0(txt1: &str, txt2: &str) {
     assert_text::print_diff_github_style(txt2, txt1);
