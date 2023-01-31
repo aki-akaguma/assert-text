@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] *
+## [Unreleased]
+
+
+## [0.2.8] (2023-01-31)
 ### Added
 * `.github/workflows/test-ubuntu.yml`
 * `.github/workflows/test-macos.yml`
@@ -17,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * bug: test result failed on windows
 * clippy: `single_component_path_imports`, `redundant_static_lifetimes`
 * clippy: `needless_borrow`, `bool_assert_comparison`
-
 
 ## [0.2.7] (2023-01-10)
 ### Added
@@ -93,7 +95,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 0.1.0 (2017-11-21)
 * first commit
 
-[Unreleased]: https://github.com/aki-akaguma/assert-text/compare/v0.2.7..HEAD
+[Unreleased]: https://github.com/aki-akaguma/assert-text/compare/v0.2.8..HEAD
+[0.2.8]: https://github.com/aki-akaguma/assert-text/compare/v0.2.7..v0.2.8
 [0.2.7]: https://github.com/aki-akaguma/assert-text/compare/v0.2.6..v0.2.7
 [0.2.6]: https://github.com/aki-akaguma/assert-text/compare/v0.2.5..v0.2.6
 [0.2.5]: https://github.com/aki-akaguma/assert-text/compare/v0.2.4..v0.2.5
