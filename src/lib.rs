@@ -59,7 +59,7 @@ macro_rules! assert_text_match {
     ($left: expr, $right: expr) => {
         let re = regex::Regex::new($right).unwrap();
         if !re.is_match($left) {
-            panic!("assertion failed")
+            assert_eq!($left, concat!("not match of regex: \"", $right, "\""));
         };
     };
 }
