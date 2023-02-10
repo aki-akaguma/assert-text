@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * `assert_text_match!()`: more message on error
 
+### Removed
+* `COPYING`
+
 ### Fixed
 * `LICENSE-APACHE`, `LICENSE-MIT`
 
