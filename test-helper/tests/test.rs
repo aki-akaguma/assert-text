@@ -26,7 +26,6 @@ mod test_1 {
     //use exec_target::args_from;
     const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
-    #[cfg(not(windows))]
     use rustversion::{before, not};
     //
     #[cfg(not(windows))]
@@ -46,19 +45,26 @@ mod test_1 {
         )
     }
     //
-    #[cfg(not(windows))]
+    #[cfg(windows)]
+    #[not(before(1.73.0))]
+    fn thread_panic_error_out_s() -> &'static str {
+        concat!(
+            "thread \'main\' panicked at test-helper\\src\\t.rs:8:5:\nassertion failed\n",
+            note_backtrace!()
+        )
+    }
+    #[cfg(windows)]
+    #[before(1.73.0)]
+    fn thread_panic_error_out_s() -> &'static str {
+        concat!(
+            "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:8:5\n",
+            note_backtrace!()
+        )
+    }
+    //
     macro_rules! thread_panic_error_out {
         () => {
             thread_panic_error_out_s()
-        };
-    }
-    #[cfg(windows)]
-    macro_rules! thread_panic_error_out {
-        () => {
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:8:5\n",
-                note_backtrace!()
-            )
         };
     }
     //
@@ -163,7 +169,6 @@ mod test_2 {
     //use exec_target::args_from;
     const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
-    #[cfg(not(windows))]
     use rustversion::{before, not};
     //
     #[cfg(not(windows))]
@@ -183,19 +188,26 @@ mod test_2 {
         )
     }
     //
-    #[cfg(not(windows))]
+    #[cfg(windows)]
+    #[not(before(1.73.0))]
+    fn thread_panic_error_out_s() -> &'static str {
+        concat!(
+            "thread \'main\' panicked at test-helper\\src\\t.rs:12:5:\nassertion failed\n",
+            note_backtrace!()
+        )
+    }
+    #[cfg(windows)]
+    #[before(1.73.0)]
+    fn thread_panic_error_out_s() -> &'static str {
+        concat!(
+            "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:12:5\n",
+            note_backtrace!()
+        )
+    }
+    //
     macro_rules! thread_panic_error_out {
         () => {
             thread_panic_error_out_s()
-        };
-    }
-    #[cfg(windows)]
-    macro_rules! thread_panic_error_out {
-        () => {
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:12:5\n",
-                note_backtrace!()
-            )
         };
     }
     //
@@ -287,7 +299,6 @@ mod test_3 {
     //use exec_target::args_from;
     const TARGET_EXE_PATH: &str = super::TARGET_EXE_PATH;
     //
-    #[cfg(not(windows))]
     use rustversion::{before, not};
     //
     #[cfg(not(windows))]
@@ -307,19 +318,26 @@ mod test_3 {
         )
     }
     //
-    #[cfg(not(windows))]
+    #[cfg(windows)]
+    #[not(before(1.73.0))]
+    fn thread_panic_error_out_s() -> &'static str {
+        concat!(
+            "thread \'main\' panicked at test-helper\\src\\t.rs:16:5:\nassertion failed\n",
+            note_backtrace!()
+        )
+    }
+    #[cfg(windows)]
+    #[before(1.73.0)]
+    fn thread_panic_error_out_s() -> &'static str {
+        concat!(
+            "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:16:5\n",
+            note_backtrace!()
+        )
+    }
+    //
     macro_rules! thread_panic_error_out {
         () => {
             thread_panic_error_out_s()
-        };
-    }
-    #[cfg(windows)]
-    macro_rules! thread_panic_error_out {
-        () => {
-            concat!(
-                "thread \'main\' panicked at \'assertion failed\', test-helper\\src\\t.rs:16:5\n",
-                note_backtrace!()
-            )
         };
     }
     //
