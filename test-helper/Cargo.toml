@@ -12,6 +12,7 @@ assert-text = { path="../" }
 
 [dev-dependencies]
 exec-target = "0.2"
+rustversion = "1.0"
 
 [build-dependencies]
 rustc_version = "0.4"
