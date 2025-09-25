@@ -9,10 +9,10 @@ path = "src/main.rs"
 
 [dependencies]
 assert-text = { path="../" }
+regex = "1.11"
 
 [dev-dependencies]
 exec-target = "0.2"
 rustversion = "1.0"
 
 [build-dependencies]
-rustc_version = "0.4"

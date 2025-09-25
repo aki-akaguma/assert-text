@@ -10,7 +10,7 @@ You will see different characters if that is different.
 - assert_text_starts_with!(txt1, txt2)
 - assert_text_ends_with!(txt1, txt2)
 - assert_text_match!(txt1, regex_text2)
-- minimum support rustc 1.56.1 (59eed8a2a 2021-11-01)
+- minimum support rustc 1.65.0 (897e37553 2022-11-02)
 
 */
 
@@ -59,7 +59,16 @@ macro_rules! assert_text_match {
     ($left: expr, $right: expr) => {
         let re = regex::Regex::new($right).unwrap();
         if !re.is_match($left) {
-            assert_eq!($left, concat!("not match of regex: \"", $right, "\""));
+            panic!(concat!(
+                "assertion failed\n",
+                "  left: \"",
+                $left,
+                "\"\n",
+                " regex: ",
+                "\"\n",
+                $right,
+                "\""
+            ));
         };
     };
 }

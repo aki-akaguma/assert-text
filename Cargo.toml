@@ -10,12 +10,12 @@ categories = ["development-tools::testing", "text-processing"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 edition = "2021"
-rust-version = "1.56.0"
+rust-version = "1.65.0"
 repository = "https://github.com/aki-akaguma/assert-texts"
 
 [dependencies]
 difference = "2.0"
-regex = "1.7"
+regex = "1.11"
 
 [workspace]
 members = ["test-helper"]
