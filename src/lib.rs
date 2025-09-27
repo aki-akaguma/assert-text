@@ -14,6 +14,26 @@ You will see different characters if that is different.
 
 */
 
+/// Asserts that two text expressions are equal.
+///
+/// If the texts are not equal, it prints a GitHub-style diff and panics.
+///
+/// # Arguments
+///
+/// * `$left` - The first text expression.
+/// * `$right` - The second text expression.
+///
+/// # Examples
+///
+/// ```
+/// use assert_text::assert_text_eq;
+/// assert_text_eq!("hello", "hello");
+/// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_eq;
+/// assert_text_eq!("hello", "world");
+/// ```
 #[macro_export]
 macro_rules! assert_text_eq {
     ($left: expr, $right: expr) => {
@@ -26,6 +46,27 @@ macro_rules! assert_text_eq {
     };
 }
 
+/// Asserts that the first text expression starts with the second text expression.
+///
+/// If the first text does not start with the second, it prints a GitHub-style diff
+/// of the differing prefix and panics.
+///
+/// # Arguments
+///
+/// * `$left` - The text expression to check.
+/// * `$right` - The prefix to check against.
+///
+/// # Examples
+///
+/// ```
+/// use assert_text::assert_text_starts_with;
+/// assert_text_starts_with!("hello world", "hello ");
+/// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_starts_with;
+/// assert_text_starts_with!("hello world", "goodbye");
+/// ```
 #[macro_export]
 macro_rules! assert_text_starts_with {
     ($left: expr, $right: expr) => {
@@ -40,6 +81,27 @@ macro_rules! assert_text_starts_with {
     };
 }
 
+/// Asserts that the first text expression ends with the second text expression.
+///
+/// If the first text does not end with the second, it prints a GitHub-style diff
+/// of the differing suffix and panics.
+///
+/// # Arguments
+///
+/// * `$left` - The text expression to check.
+/// * `$right` - The suffix to check against.
+///
+/// # Examples
+///
+/// ```
+/// use assert_text::assert_text_ends_with;
+/// assert_text_ends_with!("hello world", " world");
+/// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_ends_with;
+/// assert_text_ends_with!("hello world", "goodbye");
+/// ```
 #[macro_export]
 macro_rules! assert_text_ends_with {
     ($left: expr, $right: expr) => {
@@ -54,6 +116,30 @@ macro_rules! assert_text_ends_with {
     };
 }
 
+/// Asserts that the first text expression matches the given regular expression.
+///
+/// If the text does not match the regex, it panics.
+///
+/// # Arguments
+///
+/// * `$left` - The text expression to check.
+/// * `$right` - The regular expression string.
+///
+/// # Panics
+///
+/// Panics if the `$right` string is not a valid regular expression.
+///
+/// # Examples
+///
+/// ```
+/// use assert_text::assert_text_match;
+/// assert_text_match!("hello world", r"^h.+d$");
+/// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_match;
+/// assert_text_match!("hello world", r"^goodbye.*");
+/// ```
 #[macro_export]
 macro_rules! assert_text_match {
     ($left: expr, $right: expr) => {
@@ -76,6 +162,21 @@ macro_rules! assert_text_match {
 use difference::{Changeset, Difference};
 use std::string::ToString;
 
+/// Prints a GitHub-style diff between two text slices to stdout.
+///
+/// This function highlights additions in green and removals in red.
+///
+/// # Arguments
+///
+/// * `text1` - The original text.
+/// * `text2` - The modified text.
+///
+/// # Examples
+///
+/// ```
+/// use assert_text::print_diff_github_style;
+/// print_diff_github_style("hello world", "Hello orld");
+/// ```
 pub fn print_diff_github_style(text1: &str, text2: &str) {
     //
     let color_green = "\x1b[32m";
@@ -143,6 +244,8 @@ pub fn print_diff_github_style(text1: &str, text2: &str) {
     print!("{}", out_s.as_str());
 }
 
+/// Formats a line that is the same in both texts for diff output.
+/// Prepends a space to the line.
 #[inline(never)]
 fn format_diff_line_same(y: &str) -> String {
     let mut s = String::with_capacity(y.len() + 2);
@@ -155,6 +258,7 @@ fn format_diff_line_same(y: &str) -> String {
     s
 }
 
+/// Formats a line that is either added or removed, with a specific mark and color.
 #[inline(never)]
 fn format_diff_line_mark(
     mark: &str, // "+" or "-"
@@ -174,6 +278,7 @@ fn format_diff_line_mark(
     s
 }
 
+/// Formats a line that has been changed (both added and removed parts) for diff output.
 #[inline(never)]
 fn format_diff_add_rem(
     mark: &str, // "+" or "-"
