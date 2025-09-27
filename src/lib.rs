@@ -7,6 +7,7 @@ You will see different characters if that is different.
 # Features
 
 - assert_text_eq!(txt1, txt2)
+- assert_text_contains!(txt1, txt2)
 - assert_text_starts_with!(txt1, txt2)
 - assert_text_ends_with!(txt1, txt2)
 - assert_text_match!(txt1, regex_text2)
@@ -116,6 +117,39 @@ macro_rules! assert_text_ends_with {
     };
 }
 
+/// Asserts that the first text contains the given second text.
+///
+/// If the text does not contains second text, it panics.
+///
+/// # Arguments
+///
+/// * `$left` - The text expression to check.
+/// * `$right` - The second text expression.
+///
+/// # Examples
+///
+/// ```
+/// use assert_text::assert_text_contains;
+/// assert_text_contains!("hello world", "o w");
+/// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_contains;
+/// assert_text_contains!("hello world", "apple");
+/// ```
+#[macro_export]
+macro_rules! assert_text_contains {
+    ($left: expr, $right: expr) => {
+        if !$left.contains($right) {
+            panic!(
+                concat!("assertion failed\n", "  left: \"{}\"\n", " right: \"{}\""),
+                $left.escape_debug(),
+                $right.escape_debug(),
+            );
+        };
+    };
+}
+
 /// Asserts that the first text expression matches the given regular expression.
 ///
 /// If the text does not match the regex, it panics.
@@ -145,16 +179,11 @@ macro_rules! assert_text_match {
     ($left: expr, $right: expr) => {
         let re = regex::Regex::new($right).unwrap();
         if !re.is_match($left) {
-            panic!(concat!(
-                "assertion failed\n",
-                "  left: \"",
-                $left,
-                "\"\n",
-                " regex: ",
-                "\"\n",
-                $right,
-                "\""
-            ));
+            panic!(
+                concat!("assertion failed\n", "  left: \"{}\"\n", " regex: \"{}\""),
+                $left.escape_debug(),
+                $right.escape_debug(),
+            );
         };
     };
 }

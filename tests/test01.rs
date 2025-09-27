@@ -88,6 +88,26 @@ mod test_4 {
     #[test]
     #[should_panic = "assertion failed"]
     fn test_43() {
-        assert_text_match!(txt!(L), "i have seldom heard here");
+        assert_text_match!(txt!(L), "i have .+ heard here");
+    }
+}
+
+// test assert_text_contains!(txt1, re_txt2)
+#[cfg(test)]
+mod test_5 {
+    use assert_text::assert_text_contains;
+    //
+    #[test]
+    fn test_51() {
+        assert_text_contains!(txt!(L), "not that he felt any emotion.");
+    }
+    #[test]
+    fn test_52() {
+        assert_text_contains!(txt!(R), "not that her felt any emotion.");
+    }
+    #[test]
+    #[should_panic = "assertion failed"]
+    fn test_53() {
+        assert_text_contains!(txt!(L), "i have seldom heard here");
     }
 }
