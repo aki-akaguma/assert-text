@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+
+## [0.2.11] (2025-09-28)
 ### Added
 * doc comments
 * `assert_text_contains!()`
@@ -13,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * rust-version = "1.65.0"
 * refactor tests
-
 
 ## [0.2.10] (2024-06-09)
 ### Changed
@@ -120,7 +122,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 0.1.0 (2017-11-21)
 * first commit
 
-[Unreleased]: https://github.com/aki-akaguma/assert-text/compare/v0.2.10..HEAD
+[Unreleased]: https://github.com/aki-akaguma/assert-text/compare/v0.2.11..HEAD
+[0.2.11]: https://github.com/aki-akaguma/assert-text/compare/v0.2.10..v0.2.11
 [0.2.10]: https://github.com/aki-akaguma/assert-text/compare/v0.2.9..v0.2.10
 [0.2.9]: https://github.com/aki-akaguma/assert-text/compare/v0.2.8..v0.2.9
 [0.2.8]: https://github.com/aki-akaguma/assert-text/compare/v0.2.7..v0.2.8
