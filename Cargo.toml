@@ -1,6 +1,6 @@
 [package]
 name = "assert-text"
-version = "0.2.11"
+version = "0.3.0"
 authors = ["aki <aki.akaguma@hotmail.com>"]
 description = """
 the testing macro tools.
@@ -15,7 +15,7 @@ repository = "https://github.com/aki-akaguma/assert-texts"
 
 [dependencies]
 difference = "2.0"
-regex = "1.11"
+regex = "1.12"
 
 [workspace]
 members = ["test-helper"]
