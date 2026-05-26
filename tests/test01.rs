@@ -151,6 +151,11 @@ mod test_5 {
     #[test]
     #[should_panic = "custom message: quux"]
     fn test_contains_custom_message() {
-        assert_text_contains!(txt!(L), "i have seldom heard here", "custom message: {}", "quux");
+        assert_text_contains!(
+            txt!(L),
+            "i have seldom heard here",
+            "custom message: {}",
+            "quux"
+        );
     }
 }
