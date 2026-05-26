@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 * Prevent UTF-8 slicing panics in `assert_text_starts_with!()` and `assert_text_ends_with!()` by determining slice indices using character boundaries instead of raw byte lengths.
 * Remove redundant memory allocations and improve initial `String` capacity calculation in diff formatting functions (`format_diff_line_same` and `format_diff_line_mark`).
+* Reduce heap allocations in `format_diff_add_rem` by using borrowed string slices instead of creating many small `String` objects.
 
 ### Changed
 * Ensure macro argument hygiene and single evaluation in all assertion macros (`assert_text_eq!()`, `assert_text_starts_with!()`, `assert_text_ends_with!()`, `assert_text_contains!()`, `assert_text_match!()`) by binding arguments to references using `match`.

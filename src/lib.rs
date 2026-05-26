@@ -287,7 +287,6 @@ macro_rules! assert_text_match {
 }
 
 use difference::{Changeset, Difference};
-use std::string::ToString;
 
 /// Prints a GitHub-style diff between two text slices to stdout.
 ///
@@ -424,16 +423,16 @@ fn format_diff_add_rem(
         Reve,
     }
     //
-    let mut ca_v: Vec<(Cattr, String)> = vec![(Cattr::Fore, mark.to_string())];
+    let mut ca_v: Vec<(Cattr, &str)> = vec![(Cattr::Fore, mark)];
     //
-    let Changeset { diffs, .. } = Changeset::new(x, y, " ");
-    for c in diffs {
+    let changeset = Changeset::new(x, y, " ");
+    for c in &changeset.diffs {
         match c {
             Difference::Same(ref z) => {
                 for line in z.split_terminator('\n') {
-                    ca_v.push((Cattr::Fore, line.to_string()));
-                    ca_v.push((Cattr::None, "\n".to_string()));
-                    ca_v.push((Cattr::Fore, mark.to_string()));
+                    ca_v.push((Cattr::Fore, line));
+                    ca_v.push((Cattr::None, "\n"));
+                    ca_v.push((Cattr::Fore, mark));
                 }
                 let bytes = z.as_bytes();
                 let len = bytes.len();
@@ -441,13 +440,13 @@ fn format_diff_add_rem(
                     ca_v.pop();
                     ca_v.pop();
                 }
-                ca_v.push((Cattr::Fore, " ".to_string()));
+                ca_v.push((Cattr::Fore, " "));
             }
             Difference::Add(ref z) => {
                 for line in z.split_terminator('\n') {
-                    ca_v.push((Cattr::Reve, line.to_string()));
-                    ca_v.push((Cattr::None, "\n".to_string()));
-                    ca_v.push((Cattr::Fore, mark.to_string()));
+                    ca_v.push((Cattr::Reve, line));
+                    ca_v.push((Cattr::None, "\n"));
+                    ca_v.push((Cattr::Fore, mark));
                 }
                 let bytes = z.as_bytes();
                 let len = bytes.len();
@@ -455,7 +454,7 @@ fn format_diff_add_rem(
                     ca_v.pop();
                     ca_v.pop();
                 }
-                ca_v.push((Cattr::Fore, " ".to_string()));
+                ca_v.push((Cattr::Fore, " "));
             }
             _ => {}
         };
@@ -476,7 +475,7 @@ fn format_diff_add_rem(
             }
             prev_a = *cat;
         }
-        out_s.push_str(st.as_str());
+        out_s.push_str(st);
     }
     if prev_a != Cattr::None {
         out_s.push_str(color_end);
