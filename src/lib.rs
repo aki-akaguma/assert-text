@@ -305,12 +305,13 @@ use difference::{Changeset, Difference};
 /// ```
 pub fn print_diff_github_style(text1: &str, text2: &str) {
     //
-    let color_green = "\x1b[32m";
-    let color_red = "\x1b[31m";
-    let color_bright_green = "\x1b[1;32m";
-    let color_reverse_red = "\x1b[31;7m";
-    let color_reverse_green = "\x1b[32;7m";
-    let color_end = "\x1b[0m";
+    let use_color = std::env::var("NO_COLOR").is_err();
+    let color_green = if use_color { "\x1b[32m" } else { "" };
+    let color_red = if use_color { "\x1b[31m" } else { "" };
+    let color_bright_green = if use_color { "\x1b[1;32m" } else { "" };
+    let color_reverse_red = if use_color { "\x1b[31;7m" } else { "" };
+    let color_reverse_green = if use_color { "\x1b[32;7m" } else { "" };
+    let color_end = if use_color { "\x1b[0m" } else { "" };
     //
     let mut out_s = String::new();
     //

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 * Support for custom panic messages in all assertion macros (`assert_text_eq!()`, `assert_text_starts_with!()`, `assert_text_ends_with!()`, `assert_text_contains!()`, `assert_text_match!()`).
+* Support for the `NO_COLOR` environment variable to disable ANSI colors in diff output.
 
 ### Fixed
 * Prevent UTF-8 slicing panics in `assert_text_starts_with!()` and `assert_text_ends_with!()` by determining slice indices using character boundaries instead of raw byte lengths.
