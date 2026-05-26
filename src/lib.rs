@@ -11,6 +11,7 @@ You will see different characters if that is different.
 - assert_text_starts_with!(txt1, txt2)
 - assert_text_ends_with!(txt1, txt2)
 - assert_text_match!(txt1, regex_text2)
+- supports custom panic messages
 - minimum support rustc 1.65.0 (897e37553 2022-11-02)
 
 */
@@ -35,16 +36,24 @@ You will see different characters if that is different.
 /// use assert_text::assert_text_eq;
 /// assert_text_eq!("hello", "world");
 /// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_eq;
+/// assert_text_eq!("hello", "world", "custom message: {}", "foo");
+/// ```
 #[macro_export]
 macro_rules! assert_text_eq {
-    ($left: expr, $right: expr) => {
+    ($left: expr, $right: expr $(,)?) => {
+        $crate::assert_text_eq!($left, $right, "assertion failed")
+    };
+    ($left: expr, $right: expr, $($arg:tt)+) => {
         match (&$left, &$right) {
             (left_val, right_val) => {
                 let left_val: &str = left_val.as_ref();
                 let right_val: &str = right_val.as_ref();
                 if left_val != right_val {
                     $crate::print_diff_github_style(right_val, left_val);
-                    panic!("assertion failed")
+                    panic!($($arg)+)
                 }
             }
         }
@@ -72,9 +81,17 @@ macro_rules! assert_text_eq {
 /// use assert_text::assert_text_starts_with;
 /// assert_text_starts_with!("hello world", "goodbye");
 /// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_starts_with;
+/// assert_text_starts_with!("hello world", "goodbye", "custom message: {}", "foo");
+/// ```
 #[macro_export]
 macro_rules! assert_text_starts_with {
-    ($left: expr, $right: expr) => {
+    ($left: expr, $right: expr $(,)?) => {
+        $crate::assert_text_starts_with!($left, $right, "assertion failed")
+    };
+    ($left: expr, $right: expr, $($arg:tt)+) => {
         match (&$left, &$right) {
             (left_val, right_val) => {
                 let left_val: &str = left_val.as_ref();
@@ -88,7 +105,7 @@ macro_rules! assert_text_starts_with {
                         .unwrap_or_else(|| left_val.len());
                     let edit = &left_val[..limit];
                     $crate::print_diff_github_style(right_val, edit);
-                    panic!("assertion failed")
+                    panic!($($arg)+)
                 }
             }
         }
@@ -116,9 +133,17 @@ macro_rules! assert_text_starts_with {
 /// use assert_text::assert_text_ends_with;
 /// assert_text_ends_with!("hello world", "goodbye");
 /// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_ends_with;
+/// assert_text_ends_with!("hello world", "goodbye", "custom message: {}", "foo");
+/// ```
 #[macro_export]
 macro_rules! assert_text_ends_with {
-    ($left: expr, $right: expr) => {
+    ($left: expr, $right: expr $(,)?) => {
+        $crate::assert_text_ends_with!($left, $right, "assertion failed")
+    };
+    ($left: expr, $right: expr, $($arg:tt)+) => {
         match (&$left, &$right) {
             (left_val, right_val) => {
                 let left_val: &str = left_val.as_ref();
@@ -134,7 +159,7 @@ macro_rules! assert_text_ends_with {
                         .unwrap_or(0);
                     let edit = &left_val[limit..];
                     $crate::print_diff_github_style(right_val, edit);
-                    panic!("assertion failed")
+                    panic!($($arg)+)
                 }
             }
         }
@@ -161,19 +186,37 @@ macro_rules! assert_text_ends_with {
 /// use assert_text::assert_text_contains;
 /// assert_text_contains!("hello world", "apple");
 /// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_contains;
+/// assert_text_contains!("hello world", "apple", "custom message: {}", "foo");
+/// ```
 #[macro_export]
 macro_rules! assert_text_contains {
-    ($left: expr, $right: expr) => {
+    ($left: expr, $right: expr $(,)?) => {
         match (&$left, &$right) {
             (left_val, right_val) => {
                 let left_val: &str = left_val.as_ref();
                 let right_val: &str = right_val.as_ref();
                 if !left_val.contains(right_val) {
-                    panic!(
+                    $crate::assert_text_contains!(
+                        left_val,
+                        right_val,
                         concat!("assertion failed\n", "  left: \"{}\"\n", " right: \"{}\""),
                         left_val.escape_debug(),
                         right_val.escape_debug(),
-                    );
+                    )
+                }
+            }
+        }
+    };
+    ($left: expr, $right: expr, $($arg:tt)+) => {
+        match (&$left, &$right) {
+            (left_val, right_val) => {
+                let left_val: &str = left_val.as_ref();
+                let right_val: &str = right_val.as_ref();
+                if !left_val.contains(right_val) {
+                    panic!($($arg)+);
                 }
             }
         }
@@ -204,20 +247,39 @@ macro_rules! assert_text_contains {
 /// use assert_text::assert_text_match;
 /// assert_text_match!("hello world", r"^goodbye.*");
 /// ```
+///
+/// ```should_panic
+/// use assert_text::assert_text_match;
+/// assert_text_match!("hello world", r"^goodbye.*", "custom message: {}", "foo");
+/// ```
 #[macro_export]
 macro_rules! assert_text_match {
-    ($left: expr, $right: expr) => {
+    ($left: expr, $right: expr $(,)?) => {
         match (&$left, &$right) {
             (left_val, right_val) => {
                 let left_val: &str = left_val.as_ref();
                 let right_val: &str = right_val.as_ref();
                 let re = regex::Regex::new(right_val).unwrap();
                 if !re.is_match(left_val) {
-                    panic!(
+                    $crate::assert_text_match!(
+                        left_val,
+                        right_val,
                         concat!("assertion failed\n", "  left: \"{}\"\n", " regex: \"{}\""),
                         left_val.escape_debug(),
                         right_val.escape_debug(),
-                    );
+                    )
+                }
+            }
+        }
+    };
+    ($left: expr, $right: expr, $($arg:tt)+) => {
+        match (&$left, &$right) {
+            (left_val, right_val) => {
+                let left_val: &str = left_val.as_ref();
+                let right_val: &str = right_val.as_ref();
+                let re = regex::Regex::new(right_val).unwrap();
+                if !re.is_match(left_val) {
+                    panic!($($arg)+);
                 }
             }
         }

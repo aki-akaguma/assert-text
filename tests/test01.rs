@@ -30,6 +30,11 @@ mod test_1 {
     fn test_13() {
         assert_text_eq!(txt!(L), txt!(R));
     }
+    #[test]
+    #[should_panic = "custom message: foo"]
+    fn test_14() {
+        assert_text_eq!(txt!(L), txt!(R), "custom message: {}", "foo");
+    }
 }
 
 // test assert_text_starts_with!(txt1, txt2)
@@ -58,6 +63,11 @@ mod test_2 {
     #[should_panic = "assertion failed"]
     fn test_utf8_starts_with_fail_panic_safe() {
         assert_text_starts_with!("こんにちは", "a");
+    }
+    #[test]
+    #[should_panic = "custom message: bar"]
+    fn test_starts_with_custom_message() {
+        assert_text_starts_with!(txt!(L), "i have seldom", "custom message: {}", "bar");
     }
 }
 
@@ -88,6 +98,11 @@ mod test_3 {
     fn test_utf8_ends_with_fail_panic_safe() {
         assert_text_ends_with!("こんにちは", "a");
     }
+    #[test]
+    #[should_panic = "custom message: baz"]
+    fn test_ends_with_custom_message() {
+        assert_text_ends_with!(txt!(L), "heard here", "custom message: {}", "baz");
+    }
 }
 
 // test assert_text_match!(txt1, re_txt2)
@@ -108,6 +123,11 @@ mod test_4 {
     fn test_43() {
         assert_text_match!(txt!(L), "i have .+ heard here");
     }
+    #[test]
+    #[should_panic = "custom message: qux"]
+    fn test_match_custom_message() {
+        assert_text_match!(txt!(L), "i have .+ heard here", "custom message: {}", "qux");
+    }
 }
 
 // test assert_text_contains!(txt1, re_txt2)
@@ -127,5 +147,10 @@ mod test_5 {
     #[should_panic = "assertion failed"]
     fn test_53() {
         assert_text_contains!(txt!(L), "i have seldom heard here");
+    }
+    #[test]
+    #[should_panic = "custom message: quux"]
+    fn test_contains_custom_message() {
+        assert_text_contains!(txt!(L), "i have seldom heard here", "custom message: {}", "quux");
     }
 }

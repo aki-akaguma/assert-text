@@ -16,9 +16,11 @@ You will see different characters if that is different.
 ## Features
 
 - assert_text_eq!(txt1, txt2)
+- assert_text_contains!(txt1, txt2)
 - assert_text_starts_with!(txt1, txt2)
 - assert_text_ends_with!(txt1, txt2)
 - assert_text_match!(txt1, regex_text2)
+- supports custom panic messages
 - minimum support rustc 1.65.0 (897e37553 2022-11-02)
 
 
