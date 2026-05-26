@@ -38,12 +38,16 @@ You will see different characters if that is different.
 #[macro_export]
 macro_rules! assert_text_eq {
     ($left: expr, $right: expr) => {
-        if $left != $right {
-            let orig = $right;
-            let edit = &$left[0..];
-            $crate::print_diff_github_style(orig, edit);
-            panic!("assertion failed")
-        };
+        match (&$left, &$right) {
+            (left_val, right_val) => {
+                let left_val: &str = left_val.as_ref();
+                let right_val: &str = right_val.as_ref();
+                if left_val != right_val {
+                    $crate::print_diff_github_style(right_val, left_val);
+                    panic!("assertion failed")
+                }
+            }
+        }
     };
 }
 
@@ -71,14 +75,23 @@ macro_rules! assert_text_eq {
 #[macro_export]
 macro_rules! assert_text_starts_with {
     ($left: expr, $right: expr) => {
-        if !$left.starts_with($right) {
-            let ll = $left.len();
-            let rl = $right.len();
-            let orig = $right;
-            let edit = &$left[0..ll.min(rl)];
-            $crate::print_diff_github_style(orig, edit);
-            panic!("assertion failed")
-        };
+        match (&$left, &$right) {
+            (left_val, right_val) => {
+                let left_val: &str = left_val.as_ref();
+                let right_val: &str = right_val.as_ref();
+                if !left_val.starts_with(right_val) {
+                    let right_chars = right_val.chars().count();
+                    let limit = left_val
+                        .char_indices()
+                        .nth(right_chars)
+                        .map(|(idx, _)| idx)
+                        .unwrap_or_else(|| left_val.len());
+                    let edit = &left_val[..limit];
+                    $crate::print_diff_github_style(right_val, edit);
+                    panic!("assertion failed")
+                }
+            }
+        }
     };
 }
 
@@ -106,14 +119,25 @@ macro_rules! assert_text_starts_with {
 #[macro_export]
 macro_rules! assert_text_ends_with {
     ($left: expr, $right: expr) => {
-        if !$left.ends_with($right) {
-            let ll = $left.len();
-            let rl = $right.len();
-            let orig = $right;
-            let edit = &$left[if ll > rl { ll - rl } else { 0 }..];
-            $crate::print_diff_github_style(orig, edit);
-            panic!("assertion failed")
-        };
+        match (&$left, &$right) {
+            (left_val, right_val) => {
+                let left_val: &str = left_val.as_ref();
+                let right_val: &str = right_val.as_ref();
+                if !left_val.ends_with(right_val) {
+                    let right_chars = right_val.chars().count();
+                    let total_chars = left_val.chars().count();
+                    let skip_chars = total_chars.saturating_sub(right_chars);
+                    let limit = left_val
+                        .char_indices()
+                        .nth(skip_chars)
+                        .map(|(idx, _)| idx)
+                        .unwrap_or(0);
+                    let edit = &left_val[limit..];
+                    $crate::print_diff_github_style(right_val, edit);
+                    panic!("assertion failed")
+                }
+            }
+        }
     };
 }
 
@@ -140,13 +164,19 @@ macro_rules! assert_text_ends_with {
 #[macro_export]
 macro_rules! assert_text_contains {
     ($left: expr, $right: expr) => {
-        if !$left.contains($right) {
-            panic!(
-                concat!("assertion failed\n", "  left: \"{}\"\n", " right: \"{}\""),
-                $left.escape_debug(),
-                $right.escape_debug(),
-            );
-        };
+        match (&$left, &$right) {
+            (left_val, right_val) => {
+                let left_val: &str = left_val.as_ref();
+                let right_val: &str = right_val.as_ref();
+                if !left_val.contains(right_val) {
+                    panic!(
+                        concat!("assertion failed\n", "  left: \"{}\"\n", " right: \"{}\""),
+                        left_val.escape_debug(),
+                        right_val.escape_debug(),
+                    );
+                }
+            }
+        }
     };
 }
 
@@ -177,14 +207,20 @@ macro_rules! assert_text_contains {
 #[macro_export]
 macro_rules! assert_text_match {
     ($left: expr, $right: expr) => {
-        let re = regex::Regex::new($right).unwrap();
-        if !re.is_match($left) {
-            panic!(
-                concat!("assertion failed\n", "  left: \"{}\"\n", " regex: \"{}\""),
-                $left.escape_debug(),
-                $right.escape_debug(),
-            );
-        };
+        match (&$left, &$right) {
+            (left_val, right_val) => {
+                let left_val: &str = left_val.as_ref();
+                let right_val: &str = right_val.as_ref();
+                let re = regex::Regex::new(right_val).unwrap();
+                if !re.is_match(left_val) {
+                    panic!(
+                        concat!("assertion failed\n", "  left: \"{}\"\n", " regex: \"{}\""),
+                        left_val.escape_debug(),
+                        right_val.escape_debug(),
+                    );
+                }
+            }
+        }
     };
 }
 

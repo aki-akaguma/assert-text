@@ -50,6 +50,15 @@ mod test_2 {
     fn test_23() {
         assert_text_starts_with!(txt!(L), "i have seldom heard here");
     }
+    #[test]
+    fn test_utf8_starts_with_success() {
+        assert_text_starts_with!("こんにちは世界", "こんにちは");
+    }
+    #[test]
+    #[should_panic = "assertion failed"]
+    fn test_utf8_starts_with_fail_panic_safe() {
+        assert_text_starts_with!("こんにちは", "a");
+    }
 }
 
 // test assert_text_ends_with!(txt1, txt2)
@@ -69,6 +78,15 @@ mod test_3 {
     #[should_panic = "assertion failed"]
     fn test_33() {
         assert_text_ends_with!(txt!(L), "i have seldom heard here");
+    }
+    #[test]
+    fn test_utf8_ends_with_success() {
+        assert_text_ends_with!("こんにちは世界", "世界");
+    }
+    #[test]
+    #[should_panic = "assertion failed"]
+    fn test_utf8_ends_with_fail_panic_safe() {
+        assert_text_ends_with!("こんにちは", "a");
     }
 }
 
