@@ -393,9 +393,10 @@ fn format_diff_line_mark(
     color_start: &str,
     color_end: &str,
 ) -> String {
-    let mut s = String::with_capacity(y.len() + 2);
+    let line_count = y.split_terminator('\n').count();
+    let extra_per_line = color_start.len() + mark.len() + color_end.len() + 1;
+    let mut s = String::with_capacity(y.len() + (line_count * extra_per_line));
     for line in y.split_terminator('\n') {
-        s.reserve(line.len() + 2);
         s.push_str(color_start);
         s.push_str(mark);
         s.push_str(line);
