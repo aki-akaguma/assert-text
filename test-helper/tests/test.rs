@@ -138,7 +138,8 @@ mod test_1 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text1.txt")],
-        );
+        )
+        .unwrap();
         assert_eq!(oup.stderr, "");
         assert_eq!(oup.stdout, "");
         assert!(oup.status.success());
@@ -148,7 +149,8 @@ mod test_1 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text2.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(
             oup.stdout,
@@ -169,7 +171,8 @@ mod test_1 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text3.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(
             oup.stdout,
@@ -189,7 +192,8 @@ mod test_1 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text4.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(
             oup.stdout,
@@ -209,7 +213,8 @@ mod test_1 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["1", fixtures!("text1.txt"), fixtures!("text5.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(
             oup.stdout,
@@ -245,7 +250,8 @@ mod test_2 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["2", fixtures!("text1.txt"), fixtures!("text1.txt")],
-        );
+        )
+        .unwrap();
         assert!(oup.status.success());
         assert_eq!(oup.stdout, "");
         assert_eq!(oup.stderr, "");
@@ -255,7 +261,8 @@ mod test_2 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["2", fixtures!("text1.txt"), fixtures!("text2.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(
             oup.stdout,
@@ -275,7 +282,8 @@ mod test_2 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["2", fixtures!("text1.txt"), fixtures!("text3.txt")],
-        );
+        )
+        .unwrap();
         assert_eq!(oup.stderr, "");
         assert_eq!(oup.stdout, "");
         assert!(oup.status.success());
@@ -285,7 +293,8 @@ mod test_2 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["2", fixtures!("text1.txt"), fixtures!("text4.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(
             oup.stdout,
@@ -303,7 +312,8 @@ mod test_2 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["2", fixtures!("text1.txt"), fixtures!("text5.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(
             oup.stdout,
@@ -339,7 +349,8 @@ mod test_3 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["3", fixtures!("text1.txt"), fixtures!("text1.txt")],
-        );
+        )
+        .unwrap();
         assert_eq!(oup.stderr, "");
         assert_eq!(oup.stdout, "");
         assert!(oup.status.success());
@@ -349,7 +360,8 @@ mod test_3 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["3", fixtures!("text1.txt"), fixtures!("text2.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(oup.stdout, concat!(
             "\u{1b}[31m-\u{1b}[0m\u{1b}[31;7mHow razorback-jumping frogs can level six piqued gymnasts!\u{1b}[0m\u{1b}[31m \u{1b}[0m\n\u{1b}[32m+\u{1b}[0m\u{1b}[32;7mnasts!\u{1b}[0m\u{1b}[32m \u{1b}[0m\n",
@@ -366,7 +378,8 @@ mod test_3 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["3", fixtures!("text1.txt"), fixtures!("text3.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(oup.stdout, concat!(
             "\u{1b}[31m-\u{1b}[0m\u{1b}[31;7mHow razorback-jumping frogs can level six piqued gymnasts!\u{1b}[0m\n",
@@ -382,7 +395,8 @@ mod test_3 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["3", fixtures!("text1.txt"), fixtures!("text4.txt")],
-        );
+        )
+        .unwrap();
         assert_eq!(oup.stderr, "");
         assert_eq!(oup.stdout, "");
         assert!(oup.status.success());
@@ -392,7 +406,8 @@ mod test_3 {
         let oup = exec_target(
             TARGET_EXE_PATH,
             ["3", fixtures!("text1.txt"), fixtures!("text5.txt")],
-        );
+        )
+        .unwrap();
         assert_eq_thread_panic_error_out!(oup.stderr);
         assert_eq!(
             oup.stdout,
